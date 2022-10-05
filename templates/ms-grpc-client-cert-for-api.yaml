@@ -1,0 +1,18 @@
+{{ $name := "ms-grpc-client-cert-for-api" }}
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: {{ $name }}
+  namespace: api
+spec:
+  isCA: false
+  secretName: {{ $name }}
+  dnsNames:
+    - api.api
+  usages:
+    - client auth
+  duration: {{ .Values.defaultDuration | quote }}
+  renewBefore: {{ .Values.defaultRenewBefore | quote }}
+  privateKey: {{ .Values.clientCert.privateKey | toYaml | nindent 4 }}
+  subject: {{ .Values.subject | toYaml | nindent 4 }}
+  issuerRef: {{ .Values.issuerRef | toYaml | nindent 4 }}

@@ -1,0 +1,12 @@
+{{- $namespaces := .Values.caNamespaces -}}
+{{- range $namespaces }}
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: intermediate-ca
+  namespace: {{ . }} 
+spec:
+  ca:
+    secretName: intermediate-ca
+---
+{{- end }}

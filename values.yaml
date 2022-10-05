@@ -1,0 +1,30 @@
+# cert-manager:
+#   namespace: api
+serverCert:
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+
+clientCert:
+  privateKey:
+    algorithm: ECDSA
+    size: 256
+
+subject:
+  organizations:
+    - nextjs-grpc
+
+issuerRef:
+  name: intermediate-ca
+  kind: Issuer
+  group: cert-manager.io
+
+defaultDuration: 24h
+defaultRenewBefore: 1h
+
+caNamespaces:
+  - api
+  - ms
+  - observability
+
+publicDomainName: <TF_POPULATED>
