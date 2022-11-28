@@ -19,6 +19,13 @@ issuerRef:
   kind: Issuer
   group: cert-manager.io
 
+vaultIssuerRef:
+  name: vault-issuer
+  serverEndpoint: https://vault.vault:8200
+  secretName: <TF_POPULATED>
+  caBundle: <TF_POPULATED>
+  mountPath: <TF_POPULATED>
+
 defaultDuration: 24h
 defaultRenewBefore: 1h
 
