@@ -1,31 +1,22 @@
+{{- $vaultIssuerRef := .Values.vaultIssuerRef -}}
+{{- $namespaces := .Values.caNamespaces -}}
+{{- range $namespaces }}
 apiVersion: cert-manager.io/v1
 kind: Issuer
 metadata:
-  name: {{ .Values.vaultIssuerRef.name | quote }}
-  namespace: cert-manager
+  name: {{ $vaultIssuerRef.name | quote }}
+  namespace: {{ . | quote }}
 spec:
   vault:
     path: pki/sign/example
-    server: {{ .Values.vaultIssuerRef.serverEndpoint | quote }}
-    caBundle: {{ .Values.vaultIssuerRef.caBundle | quote }}
+    server: {{ $vaultIssuerRef.serverEndpoint | quote }}
+    caBundle: {{ $vaultIssuerRef.caBundle | quote }}
     auth:
       kubernetes:
-        mountPath: {{ .Values.vaultIssuerRef.mountPath | quote }}
+        mountPath: {{ $vaultIssuerRef.mountPath | quote }}
         role: issuer
         secretRef:
-          name: {{ .Values.vaultIssuerRef.secretName | quote }}
+          name: {{ $vaultIssuerRef.secretName | quote }}
           key: token
 ---
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: example
-  namespace: cert-manager
-spec:
-  secretName: example
-  issuerRef:
-    name: {{ .Values.vaultIssuerRef.name | quote }}
-  commonName: www.example.com
-  dnsNames:
-  - www.example.com
-  duration: 60m
+{{- end }}

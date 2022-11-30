@@ -26,7 +26,7 @@ vaultIssuerRef:
   caBundle: <TF_POPULATED>
   mountPath: <TF_POPULATED>
 
-defaultDuration: 24h
+defaultDuration: 60m
 defaultRenewBefore: 1h
 
 caNamespaces:
