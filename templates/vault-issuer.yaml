@@ -8,13 +8,13 @@ metadata:
   namespace: {{ . | quote }}
 spec:
   vault:
-    path: pki/sign/example
+    path: pki/sign/services
     server: {{ $vaultIssuerRef.serverEndpoint | quote }}
     caBundle: {{ $vaultIssuerRef.caBundle | quote }}
     auth:
       kubernetes:
         mountPath: {{ $vaultIssuerRef.mountPath | quote }}
-        role: issuer
+        role: services-issuer
         secretRef:
           name: {{ $vaultIssuerRef.secretName | quote }}
           key: token
