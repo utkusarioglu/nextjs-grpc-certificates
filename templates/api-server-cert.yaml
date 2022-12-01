@@ -12,5 +12,6 @@ spec:
   dnsNames:
     - {{ printf "%s.%s" "api" $namespace}}
   duration: {{ .Values.defaultDuration | quote }}
+  privateKey:  {{ .Values.serverCert.privateKey | toYaml | nindent 4 }}
   usages: 
     - server auth

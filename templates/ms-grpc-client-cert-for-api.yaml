@@ -12,5 +12,6 @@ spec:
   dnsNames:
     - api.api
   duration: {{ .Values.defaultDuration | quote }}
+  privateKey:  {{ .Values.clientCert.privateKey | toYaml | nindent 4 }}
   usages: 
     - client auth
