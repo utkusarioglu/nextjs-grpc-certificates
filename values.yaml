@@ -26,6 +26,3 @@ caNamespaces:
   - api
   - ms
   - observability
-# publicDomainName: <TF_POPULATED>
-# tld: <TF_POPULATED>
-# sld: <TF_POPULATED>
