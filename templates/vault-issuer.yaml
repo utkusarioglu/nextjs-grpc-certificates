@@ -1,0 +1,22 @@
+{{- $vaultIssuerRef := .Values.vaultIssuerRef -}}
+{{- $namespaces := .Values.caNamespaces -}}
+{{- range $namespaces }}
+apiVersion: cert-manager.io/v1
+kind: Issuer
+metadata:
+  name: {{ $vaultIssuerRef.name | quote }}
+  namespace: {{ . | quote }}
+spec:
+  vault:
+    path: pki/sign/services
+    server: {{ $vaultIssuerRef.serverEndpoint | quote }}
+    caBundle: {{ $vaultIssuerRef.caBundle | quote }}
+    auth:
+      kubernetes:
+        mountPath: {{ $vaultIssuerRef.mountPath | quote }}
+        role: services-issuer
+        secretRef:
+          name: {{ $vaultIssuerRef.secretName | quote }}
+          key: token
+---
+{{- end }}

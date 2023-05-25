@@ -1,4 +1,5 @@
-{{ $name := "ms-grpc-client-cert-for-api" }}
+{{- $serviceName := "web-server" -}}
+{{- $name := printf "ms-grpc-client-cert-for-%s" $serviceName -}}
 {{- $namespace := "api" -}}
 apiVersion: cert-manager.io/v1
 kind: Certificate
@@ -10,7 +11,7 @@ spec:
   issuerRef:
     name: {{ .Values.vaultIssuerRef.name | quote }}
   dnsNames:
-    - api.api
+    - {{ printf "%s.%s" $serviceName $namespace }}
   duration: {{ .Values.defaultDuration | quote }}
   privateKey:  {{ .Values.clientCert.privateKey | toYaml | nindent 4 }}
   usages: 

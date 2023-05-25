@@ -1,5 +1,5 @@
-{{ $name := "ms-grpc-client-cert-for-api" }}
-{{- $namespace := "api" -}}
+{{- $name := "jaeger-ingress-cert" -}}
+{{- $namespace := "observability" -}}
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -10,8 +10,8 @@ spec:
   issuerRef:
     name: {{ .Values.vaultIssuerRef.name | quote }}
   dnsNames:
-    - api.api
+    - {{ printf "%s.%s" "jaeger" $namespace}}
   duration: {{ .Values.defaultDuration | quote }}
-  privateKey:  {{ .Values.clientCert.privateKey | toYaml | nindent 4 }}
+  privateKey:  {{ .Values.serverCert.privateKey | toYaml | nindent 4 }}
   usages: 
-    - client auth
+    - server auth
