@@ -1,5 +1,3 @@
-# cert-manager:
-#   namespace: api
 serverCert:
   privateKey:
     algorithm: ECDSA
@@ -14,17 +12,17 @@ subject:
   organizations:
     - nextjs-grpc
 
-issuerRef:
-  name: intermediate-ca
-  kind: Issuer
-  group: cert-manager.io
+vaultIssuerRef:
+  name: vault-issuer
+  serverEndpoint: https://vault.vault:8200
+  secretName: <TF_POPULATED>
+  caBundle: <TF_POPULATED>
+  mountPath: <TF_POPULATED>
 
-defaultDuration: 24h
+defaultDuration: 2h
 defaultRenewBefore: 1h
 
 caNamespaces:
   - api
   - ms
   - observability
-
-publicDomainName: <TF_POPULATED>

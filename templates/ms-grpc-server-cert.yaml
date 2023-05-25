@@ -1,18 +1,17 @@
 {{- $name := "ms-grpc-server-cert" -}}
+{{- $namespace := "ms" -}}
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: {{ $name }}
-  namespace: ms
+  namespace: {{ $namespace }}
 spec:
-  isCA: false
   secretName: {{ $name }}
+  issuerRef:
+    name: {{ .Values.vaultIssuerRef.name | quote }}
   dnsNames:
-    - ms.ms
-  usages:
-    - server auth
+    - {{ printf "%s.%s" "ms" $namespace}}
   duration: {{ .Values.defaultDuration | quote }}
-  renewBefore: {{ .Values.defaultRenewBefore | quote }}
-  privateKey: {{ .Values.serverCert.privateKey | toYaml | nindent 4 }}
-  subject: {{ .Values.subject | toYaml | nindent 4 }}
-  issuerRef: {{ .Values.issuerRef | toYaml | nindent 4 }}
+  privateKey:  {{ .Values.serverCert.privateKey | toYaml | nindent 4 }}
+  usages: 
+    - server auth

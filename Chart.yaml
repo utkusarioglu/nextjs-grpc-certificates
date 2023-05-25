@@ -3,5 +3,5 @@ name: certificates
 description: Certificates for NextJS Grpc
 
 type: application
-version: 0.1.22
+version: 0.1.57
 appVersion: "1.16.0"
