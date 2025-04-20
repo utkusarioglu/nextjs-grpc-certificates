@@ -1,0 +1,9 @@
+{
+  "yaml.schemas": {
+    "https://json.schemastore.org/helmfile.json": [
+      "**/*.helm",
+      "file:///home/utkusarioglu/dev/projects/nextjs-grpc/certificates/templates/grafana-ingress-cert.yaml",
+      "file:///home/utkusarioglu/dev/projects/nextjs-grpc/certificates/templates/ms-grpc-client-cert-for-web-server.yaml"
+    ]
+  }
+}
